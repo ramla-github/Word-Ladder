@@ -1,0 +1,54 @@
+(FINAL)
+
+Add a 6th menu option call
+
+6. Sort N words
+
+This menu option asks the user to enter a number.
+And it grabs that many random words from the database.
+And prints out those words in alphabetical order.
+
+Here is the sample interaction:
+
+--------------
+Run the program. Menu options will show up
+1. Build graph
+2. find path
+3.
+4.
+5.
+6. Sort N words  (new for the FINAL)
+
+6 (User input)
+
+Enter the number of words you want to sort:  5
+
+Here are the 5 random words:
+
+ants
+cats
+penguins
+ox
+bats
+
+Here are the words after sorting:
+ants
+bats
+cats
+ox
+penguins
+
+============================================================
+
+Evaluation:
+
+[1 - 5 points] Adding the 6th menu option to the non-GUI menu
+[2 - 5 points] Asking the user for the input number
+[3 - 20 points] Connecting to the database and fetching the random words
+[4 - 20 points] Printing the words in the sorted order.
+
+When to submit: You can submit by August 14th.
+
+========================================================
+
+
