@@ -223,7 +223,8 @@ public class ladder {
 	
 			
 			break;
-		case 4: System.out.println("Enter word");
+			case 4:
+				System.out.println("Enter word");
 			String startValue4 =input.next();
 			startValue4 = startValue4.toLowerCase();
 			int j3=0;
@@ -314,7 +315,84 @@ public class ladder {
 				  }
 				 
 			  }
-				break;
+				 FileWriter html_file = new FileWriter("ladder.html");
+				 /*
+				 try {
+						html_file = new FileWriter("ladder.html");
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				
+						StringBuilder hg = new StringBuilder();
+
+						hg.append("<!DOCTYPE html>\n");
+						hg.append("<html>\n\n");
+						hg.append("<head>\n");
+						hg.append("\t<title>Ladder</title>\n");
+						hg.append("</head>\n\n");
+						hg.append("<body>\n");
+						hg.append("</body>\n\n");
+						hg.append("</html>");*/
+						StringBuilder hg = new StringBuilder();
+						hg.append("<!DOCTYPE html>\n");
+						hg.append("<html>\n\n");
+						hg.append("<head>\n");
+						hg.append("\t<title>Ladder</title>\n");
+						hg.append("\t<style>\n");
+						hg.append("\ttable{\n\t\tbackground-color: #ffd700;\n\t\tcolor: #ff0000;\n\t\tborder-spacing: 10px;\n" + 
+						          "\t\tfont-family: Arial;\n\t\tmargin-left: auto;\n\t\tmargin-right: auto;\n" + 
+								  "\t\tbox-shadow: inset -3px -3px 3px rgba(0,0,0,0.4), 3px 3px 5px 0px rgba(0,0,0,0.5);\n" + 
+						          "\t\tborder-radius: 0.8rem;\n\t}\n\n");
+						hg.append("\ttd{\n\t\tbackground-color: #ffff00;\n\t\tpadding: 30px;\n\t\twidth: 30px;\n\t\ttext-align: center;\n" + 
+						          "\t\tfont-size: 24px;\n\t\tfont-weight: bold;\n\t\ttext-shadow: 0px 1px 0px rgba(255,255,255,0.8)," + 
+								  "0px -1px 0px rgba(0,0,0,.8);\n\t\tbox-shadow: inset -5px -5px 7px rgba(0,0,0,0.4), " + 
+						          "2px 2px 3px 0px rgba(0,0,0,0.5);\n\t\tborder-radius: 0.8rem;\n\t}\n");
+						hg.append("\t</style>\n");
+						hg.append("</head>\n\n");
+						hg.append("<body>\n");
+						hg.append("\t<table>\n");
+						hg.append("\t\t<tr> ");
+						hg.append("\t\t<th> Words");
+						hg.append("\t\t</th>");
+						hg.append("\t\t<th> More Words ");
+						hg.append("\t\t</th>");
+						hg.append("\t\t</tr>");
+						hg.append("\t\t<tr> ");
+						hg.append("\t\t<td> No. Word ");
+						hg.append("\t\t</td>");
+						hg.append("\t\t<td> No. Word ");
+						hg.append("\t\t</td>");
+						hg.append("\t\t</tr>");
+						hg.append("\t\t<tr>  ");
+						hg.append("\t\t<td> No. Word ");
+						hg.append("\t\t</td>");
+						hg.append("\t\t<td> No. Word ");
+						hg.append("\t\t</td>");
+						hg.append("\t\t</tr>");
+						hg.append("\t\t<tr> ");
+						hg.append("\t\t<td> No. Word ");
+						hg.append("\t\t</td>");
+						hg.append("\t\t<td> No. Word ");
+						hg.append("\t\t</td>");
+						hg.append("\t\t</tr>");
+						hg.append("\t\t<caption> No. Word </caption>\n");
+						
+						hg.append("\t</table>\n");
+						hg.append("</body>\n\n");
+						hg.append("</html>");
+						html_file.write(hg.toString());
+						/*File htmlGrid = ("ladder.html");
+						try {
+							Desktop.getDesktop().browse(htmlGrid.toURI());
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}*/
+						html_file.close();
+			  
+
+			break;
 		case 5:
 			System.out.println("Goodbye");
 			break;
