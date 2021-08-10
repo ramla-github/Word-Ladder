@@ -146,7 +146,7 @@ public class ladder extends databaseInfo {
 		db_connection = DriverManager.getConnection(url, user, password);
 		System.out.println("Success: Connection established");
 		Statement statement_object = db_connection.createStatement();
-		String sql_query_str = "SELECT * FROM words";
+		String sql_query_str = "SELECT * FROM dictionary";
 		ResultSet result_set = statement_object.executeQuery(sql_query_str);
 
 	
@@ -384,6 +384,7 @@ public class ladder extends databaseInfo {
 								 result = result.replaceAll(" ", "");
 							    arr3.add(startValue3);
 						        map3.put(result,arr3);
+						        arrlist23.remove(startValue3);
 								  for(int c=0;c<arrlist23.size();c++) {
 									  String words = arrlist23.get(c);
 									  if(words.length()==length3) {
@@ -406,6 +407,8 @@ public class ladder extends databaseInfo {
 									  
 									  
 								  }
+									  
+									  
 								  }
 								  
 								  
@@ -493,6 +496,7 @@ public class ladder extends databaseInfo {
 								 result = result.replaceAll(" ", "");
 							    arr4.add(startValue4);
 						        map4.put(result,arr4);
+						        arrlist24.remove(startValue4);
 								  for(int c=0;c<arrlist24.size();c++) {
 									  String words = arrlist24.get(c);
 									  if(words.length()==length4) {
