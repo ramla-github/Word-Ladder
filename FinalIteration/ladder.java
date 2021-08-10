@@ -146,7 +146,7 @@ public class ladder extends databaseInfo {
 		db_connection = DriverManager.getConnection(url, user, password);
 		System.out.println("Success: Connection established");
 		Statement statement_object = db_connection.createStatement();
-		String sql_query_str = "SELECT * FROM dictionary";
+		String sql_query_str = "SELECT * FROM words";
 		ResultSet result_set = statement_object.executeQuery(sql_query_str);
 
 	
@@ -342,12 +342,116 @@ public class ladder extends databaseInfo {
 			break;
 		case 3:
 		
-		
+			System.out.println("Enter number of steps");
+			int steps = input.nextInt();
+			System.out.println("Enter word");
+			String startValue3 =input.next();
+			startValue3 = startValue3.toLowerCase();
+			int j2=0;
+			while (result_set.next()) {
+				
+				String Words = result_set.getString("Word");
+				 Words=Words.toLowerCase();
+					dictionaryWords.add(Words);	
+					j2++;
+				
+				}
+			
+			Collections.sort(dictionaryWords);
+			
+			  int startpoint3 = dictionaryWords.indexOf(startValue3);
+
+			  int length3 = startValue3.length();
+			  String endValue3 = "null";
+			  for(int a=startpoint3;a<dictionaryWords.size();a++) {
+				  String word = dictionaryWords.get(a);
+				  
+
+				  if(word.length()==length3) {
+					if(matching(word,startValue3)) {
+						  ArrayList<String> arr3 = new ArrayList<String>();
+						 endValue3 = word;
+						 endValue3 = endValue3.toLowerCase();
+							int endpoint3 = dictionaryWords.indexOf(endValue3);
+							
+					          List<String> arrlist23 = dictionaryWords;
+					         
+					          HashMap<String, ArrayList> map3 = new HashMap<String, ArrayList>();		
+							  String result = startValue3.replaceAll("[AEIOUaeiou]","");
+							  char[] resultarr = result.toCharArray();
+								 Arrays.sort(resultarr);
+								 result = new String(resultarr);
+								 result = result.replaceAll(" ", "");
+							    arr3.add(startValue3);
+						        map3.put(result,arr3);
+								  for(int c=0;c<arrlist23.size();c++) {
+									  String words = arrlist23.get(c);
+									  if(words.length()==length3) {
+										  result = words.replaceAll("[AEIOUaeiou]","");
+											resultarr = result.toCharArray();
+											 Arrays.sort(resultarr);
+											 result = new String(resultarr);
+											 result = result.replaceAll(" ", "");
+											 boolean exists = map3.containsKey(result);
+										     if(exists){
+										    	 
+										              map3.get(result).add(words);
+										            }
+										      
+										      else{
+										        ArrayList<String> newarr = new ArrayList<String>();
+										         newarr.add(words);
+										         map3.put(result,newarr);
+									  }
+									  
+									  
+								  }
+								  }
+								  
+								  
+								
+					          
+					           result = startValue3.replaceAll("[AEIOUaeiou]","");
+								  resultarr = result.toCharArray();
+								 Arrays.sort(resultarr);
+								 result = new String(resultarr);
+								 result = result.replaceAll(" ", "");
+									
+								 for (Map.Entry<String, ArrayList> entry : map3.entrySet()) {
+							         String key = entry.getKey();
+							         List<String> value = new ArrayList<String>();
+								     value = entry.getValue();
+								     int sizeofmap = map3.size();
+								     if(key.equals(result)&& value.size()>=steps) {
+								    	value = value.subList(0, steps);
+								         for(int i=0; i < value.size(); i++){
+								        	 if(i==(value.size()-1)) {
+										            System.out.print( value.get(i));
+
+								        	 }
+										   
+								        	 else {
+								        		 System.out.print( value.get(i) + " > ");
+								        	 }
+								        };
+							            System.out.println(" ");
+							            return;
+
+								     }
+								     
+							  }
+							  
+
+					       
+					  }
+					 
+				  }
+				 
+			  }
 	
 			
 			break;
 		case 4:
-			
 			int steps2 = 10;
 			System.out.println("Enter word");
 			String startValue4 =input.next();
