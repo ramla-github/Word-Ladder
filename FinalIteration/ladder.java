@@ -563,12 +563,13 @@ public class ladder extends databaseInfo {
 		ResultSet val_set = statement_object.executeQuery(sql_query_str);
 		  ArrayList<String> valarr = new ArrayList<String>();
 		  
+			  
 		while (val_set.next()) {
 			
 			String Clues = val_set.getString("Clue");
 			String words = val_set.getString("Word");
 			words=words.toLowerCase();
-				if(arrval.contains(words)) {
+				if(arrval.contains(words) && !(words.contentEquals(startValue4))) {
 					valarr.add(Clues);
 				}
 				
