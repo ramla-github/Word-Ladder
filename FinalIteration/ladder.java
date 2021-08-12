@@ -146,7 +146,7 @@ public class ladder extends databaseInfo {
 		db_connection = DriverManager.getConnection(url, user, password);
 		System.out.println("Success: Connection established");
 		Statement statement_object = db_connection.createStatement();
-		String sql_query_str = "SELECT * FROM dictionary";
+		String sql_query_str = "SELECT * FROM words";
 		ResultSet result_set = statement_object.executeQuery(sql_query_str);
 
 	
@@ -385,6 +385,8 @@ public class ladder extends databaseInfo {
 							    arr3.add(startValue3);
 						        map3.put(result,arr3);
 						        arrlist23.remove(startValue3);
+						        //Collections.shuffle(arrlist23);
+						        
 								  for(int c=0;c<arrlist23.size();c++) {
 									  String words = arrlist23.get(c);
 									  if(words.length()==length3) {
@@ -394,6 +396,7 @@ public class ladder extends databaseInfo {
 											 result = new String(resultarr);
 											 result = result.replaceAll(" ", "");
 											 boolean exists = map3.containsKey(result);
+											 
 										     if(exists){
 										    	 
 										              map3.get(result).add(words);
@@ -468,6 +471,8 @@ public class ladder extends databaseInfo {
 					j3++;
 				
 				}
+		      List<String> arrval= new ArrayList<String>();
+
 			
 			Collections.sort(dictionaryWords);
 			
@@ -537,19 +542,10 @@ public class ladder extends databaseInfo {
 								     int sizeofmap = map4.size();
 								     if(key.equals(result)&& value.size()>=steps2) {
 								    	value = value.subList(0, steps2);
-								         for(int i=0; i < value.size(); i++){
-								        	 if(i==(value.size()-1)) {
-										            System.out.print( value.get(i));
-
-								        	 }
-										   
-								        	 else {
-								        		 System.out.print( value.get(i) + " > ");
-								        	 }
-								        };
-							            System.out.println(" ");
-							            return;
-
+								    	arrval.addAll(value);
+								       
+							            
+								        
 								     }
 								     
 							  }
@@ -561,37 +557,40 @@ public class ladder extends databaseInfo {
 				  }
 				 
 			  }
+			  arrval = arrval.subList(0, 10);
+			     System.out.println(arrval);
+			     
+		ResultSet val_set = statement_object.executeQuery(sql_query_str);
+		  ArrayList<String> valarr = new ArrayList<String>();
+		  
+		while (val_set.next()) {
+			
+			String Clues = val_set.getString("Clue");
+			String words = val_set.getString("Word");
+			words=words.toLowerCase();
+				if(arrval.contains(words)) {
+					valarr.add(Clues);
+				}
+				
+			
+			}
+	     System.out.println(valarr);
+
+
 				 FileWriter html_file = new FileWriter("ladder.html");
-				 /*
-				 try {
-						html_file = new FileWriter("ladder.html");
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
 				
 						StringBuilder hg = new StringBuilder();
-
 						hg.append("<!DOCTYPE html>\n");
 						hg.append("<html>\n\n");
 						hg.append("<head>\n");
-						hg.append("\t<title>Ladder</title>\n");
-						hg.append("</head>\n\n");
-						hg.append("<body>\n");
-						hg.append("</body>\n\n");
-						hg.append("</html>");*/
-						StringBuilder hg = new StringBuilder();
-						hg.append("<!DOCTYPE html>\n");
-						hg.append("<html>\n\n");
-						hg.append("<head>\n");
-						hg.append("\t<title>Ladder</title>\n");
+						hg.append("\t<title>Ladder Swap Puzzle</title>\n");
 						hg.append("\t<style>\n");
-						hg.append("\ttable{\n\t\tbackground-color: #ffd700;\n\t\tcolor: #ff0000;\n\t\tborder-spacing: 10px;\n" + 
-						          "\t\tfont-family: Arial;\n\t\tmargin-left: auto;\n\t\tmargin-right: auto;\n" + 
+						hg.append("\ttable{\n\t\tbackground-color: #00b3ff;\n\t\tcolor: #000000;\n\t\tborder-spacing: 10px;\n" + 
+						          "\t\tfont-family: College;\n\t\tmargin-left: auto;\n\t\tmargin-right: auto;\n" + 
 								  "\t\tbox-shadow: inset -3px -3px 3px rgba(0,0,0,0.4), 3px 3px 5px 0px rgba(0,0,0,0.5);\n" + 
 						          "\t\tborder-radius: 0.8rem;\n\t}\n\n");
-						hg.append("\ttd{\n\t\tbackground-color: #ffff00;\n\t\tpadding: 30px;\n\t\twidth: 30px;\n\t\ttext-align: center;\n" + 
-						          "\t\tfont-size: 24px;\n\t\tfont-weight: bold;\n\t\ttext-shadow: 0px 1px 0px rgba(255,255,255,0.8)," + 
+						hg.append("\ttd{\n\t\tbackground-color: #edd2fc;\n\t\tpadding: 50px;\n\t\twidth: 100px;\n\t\ttext-align: center;\n" + 
+						          "\t\tfont-size: 18px;\n\t\tfont-weight: bold;\n\t\ttext-shadow: 0px 1px 0px rgba(255,255,255,0.8)," + 
 								  "0px -1px 0px rgba(0,0,0,.8);\n\t\tbox-shadow: inset -5px -5px 7px rgba(0,0,0,0.4), " + 
 						          "2px 2px 3px 0px rgba(0,0,0,0.5);\n\t\tborder-radius: 0.8rem;\n\t}\n");
 						hg.append("\t</style>\n");
@@ -601,41 +600,57 @@ public class ladder extends databaseInfo {
 						hg.append("\t\t<tr> ");
 						hg.append("\t\t<th> Words");
 						hg.append("\t\t</th>");
-						hg.append("\t\t<th> More Words ");
+						hg.append("\t\t<th>  ");
 						hg.append("\t\t</th>");
-						hg.append("\t\t</tr>");
+						hg.append("\t\t</tr> ");
 						hg.append("\t\t<tr> ");
-						hg.append("\t\t<td> No. Word ");
+						hg.append("\t\t<td> "+startValue4);
 						hg.append("\t\t</td>");
-						hg.append("\t\t<td> No. Word ");
+						hg.append("\t\t<td> "+valarr.get(0));
 						hg.append("\t\t</td>");
 						hg.append("\t\t</tr>");
 						hg.append("\t\t<tr>  ");
-						hg.append("\t\t<td> No. Word ");
+						hg.append("\t\t<td>  "+valarr.get(1));
 						hg.append("\t\t</td>");
-						hg.append("\t\t<td> No. Word ");
+						hg.append("\t\t<td>  "+valarr.get(2));
 						hg.append("\t\t</td>");
 						hg.append("\t\t</tr>");
 						hg.append("\t\t<tr> ");
-						hg.append("\t\t<td> No. Word ");
+						hg.append("\t\t<td>  "+valarr.get(3));
 						hg.append("\t\t</td>");
-						hg.append("\t\t<td> No. Word ");
+						hg.append("\t\t<td>  "+valarr.get(4));
 						hg.append("\t\t</td>");
 						hg.append("\t\t</tr>");
-						hg.append("\t\t<caption> No. Word </caption>\n");
+						hg.append("\t\t</th>");
+						hg.append("\t\t<th>  ");
+						hg.append("\t\t</th>");
+						hg.append("\t\t</tr>");
+						hg.append("\t\t<tr> ");
+						hg.append("\t\t<td>  "+valarr.get(5));
+						hg.append("\t\t</td>");
+						hg.append("\t\t<td>  "+valarr.get(6));
+						hg.append("\t\t</td>");
+						hg.append("\t\t</tr>");
+						hg.append("\t\t<tr>  ");
+						hg.append("\t\t<td>  "+valarr.get(7));
+						hg.append("\t\t</td>");
+						hg.append("\t\t<td> "+arrval.get(9));
+						hg.append("\t\t</td>");
+						hg.append("\t\t</tr>");
+						
+						hg.append("\t\t<caption> Find the Swap Path in 10 steps </caption>\n");
+						hg.append("");
 						
 						hg.append("\t</table>\n");
+						hg.append("");
+						hg.append("");
+						hg.append("Solve the swap ladder puzzle. It starts from left to right and from top to bottom. Use the hints to help solve the puzzle");
 						hg.append("</body>\n\n");
 						hg.append("</html>");
 						html_file.write(hg.toString());
-						/*File htmlGrid = ("ladder.html");
-						try {
-							Desktop.getDesktop().browse(htmlGrid.toURI());
-						} catch (IOException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}*/
+						 html_file.flush();
 						html_file.close();
+						
 			  
 
 			break;
